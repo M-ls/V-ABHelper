@@ -10,8 +10,8 @@ android {
         applicationId = "me.yowal.updatehelper"
         minSdk = 30
         targetSdk = 34
-        versionCode = 302
-        versionName = "3.0.2"
+        versionCode = 303
+        versionName = "3.0.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
