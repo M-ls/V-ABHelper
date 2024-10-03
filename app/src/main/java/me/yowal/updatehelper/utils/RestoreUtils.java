@@ -155,10 +155,11 @@ public class RestoreUtils {
         }
 
         // 提取当前分区的boot镜像
-        String srcBoot = "/dev/block/bootdevice/by-name/init_boot" + Config.currentSlot;
-        if (!aFileSystemManager.getFile(srcBoot).exists() || Build.MODEL.equals("PHP110")) {
-            srcBoot = "/dev/block/bootdevice/by-name/boot" + Config.currentSlot;
-        }
+        // ap只会修补boot分区 不需要考虑其他情况
+        String srcBoot = "/dev/block/bootdevice/by-name/boot" + Config.currentSlot;
+        // if (!aFileSystemManager.getFile(srcBoot).exists() || Build.MODEL.equals("PHP110")) {
+        //     srcBoot = "/dev/block/bootdevice/by-name/boot" + Config.currentSlot;
+        // }
 
         FileUtils.delete(aInstallDir + "/boot.img");
         FileUtils.delete(aInstallDir + "/apatch_patch.img");
