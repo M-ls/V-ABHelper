@@ -9,6 +9,7 @@ import android.os.ParcelFileDescriptor;
 import android.os.Process;
 import android.os.RemoteException;
 import android.os.UpdateEngineCallback;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
@@ -130,6 +131,8 @@ public class UpdateService extends RootService {
             } catch (Exception e) {
                 String ExceptionString = e.getLocalizedMessage();
                 LogUtils.e(TAG, ExceptionString);
+                if (TextUtils.isEmpty(ExceptionString))
+                    return false;
                 return ExceptionString.contains("Already processing an update") || ExceptionString.contains("waiting for reboot");
             }
         }

@@ -83,6 +83,7 @@ public class UpdateUtils {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            LogUtils.e("UpdateUtils", e.toString());
         } finally {
             if (zipFile != null) {
                 try {
