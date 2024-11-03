@@ -277,7 +277,11 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_memu, menu);
+        Shell.getShell(shell -> {
+            if (shell.isRoot()) {
+                getMenuInflater().inflate(R.menu.toolbar_memu, menu);
+            }
+        });
         return super.onCreateOptionsMenu(menu);
     }
 
