@@ -1085,6 +1085,8 @@ public class IOSOverScrollView extends LinearLayoutCompat implements OnTouchList
         int paddingTop = child.getPaddingTop();
         int contentBottom = child.getHeight() - child.getPaddingBottom();
 
+        if (getScrollY() == 0)
+            post(() -> scrollTo(0, child.getPaddingTop()));
         if (isInFlingMode)
         {
 
