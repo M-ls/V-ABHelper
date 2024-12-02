@@ -60,9 +60,7 @@ public class RestoreUtils {
         Shell.cmd("chmod 755 /data/adb/magisk/magisk_uninstaller.sh").exec();
 
         // 提取当前分区的boot镜像
-        String srcBoot = "/dev/block/bootdevice/by-name/init_boot" + Config.currentSlot;
-        if (!aFileSystemManager.getFile(srcBoot).exists() || Build.MODEL.equals("PHP110"))
-            srcBoot = "/dev/block/bootdevice/by-name/boot" + Config.currentSlot;
+        String srcBoot = "/dev/block/bootdevice/by-name/" + (Config.isInitBoot() ? "init_boot" : "boot") + Config.currentSlot;
 
         FileUtils.delete(aInstallDir + "/boot.img");
         FileUtils.delete(aInstallDir + "/magisk_patch.img");
@@ -99,9 +97,7 @@ public class RestoreUtils {
             return new PatchUtils.Result(PatchUtils.ErrorCode.OTHER_ERROR, "非 LKM 修补模式无法还原镜像");
 
         // 提取当前分区的boot镜像
-        String srcBoot = "/dev/block/bootdevice/by-name/init_boot" + Config.currentSlot;
-        if (!aFileSystemManager.getFile(srcBoot).exists() || Build.MODEL.equals("PHP110"))
-            srcBoot = "/dev/block/bootdevice/by-name/boot" + Config.currentSlot;
+        String srcBoot = "/dev/block/bootdevice/by-name/" + (Config.isInitBoot() ? "init_boot" : "boot") + Config.currentSlot;
 
         ShellUtils.fastCmd("rm -r " + aInstallDir + "/*.img");
         if (!FlashUtils.extract_image(srcBoot, aInstallDir + "/boot.img"))

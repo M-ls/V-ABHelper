@@ -329,6 +329,7 @@ public class MainActivity extends BaseActivity {
         binding.infoRootType.setText(String.format("Root实现：%s", "获取中..."));
 
         binding.infoSupportOta.setText(String.format("OTA更新：%s", "获取中..."));
+        binding.infoKernelVersion.setText(String.format("是否为init_boot活动分区：%s",Config.isInitBoot()));
         if (Config.isVab)
             binding.infoActionSolt.setText(String.format("活动分区：%s", Config.currentSlot.replaceAll("_","").toUpperCase(Locale.ROOT)));
         else
