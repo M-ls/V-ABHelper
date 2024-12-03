@@ -80,3 +80,5 @@ find_library(log-lib log)
 
 target_link_libraries(kernelsu ${log-lib})
 target_link_libraries(inject ${log-lib} local_dobby)
+target_link_options(kernelsu PRIVATE "-Wl,-z,max-page-size=16384")
+target_link_options(inject PRIVATE "-Wl,-z,max-page-size=16384")
