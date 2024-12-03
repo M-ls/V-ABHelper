@@ -56,10 +56,8 @@ public class PatchUtils {
         String next_slot = Config.currentSlot.equals("_a") ? "_b" : "_a";
 
         // 提取第二分区的boot镜像
-        String srcBoot = "/dev/block/bootdevice/by-name/init_boot" + next_slot;
-        if (!aFileSystemManager.getFile(srcBoot).exists() || Build.MODEL.equals("PHP110"))
-            srcBoot = "/dev/block/bootdevice/by-name/boot" + next_slot;
-
+        String srcBoot = "/dev/block/bootdevice/by-name/" + (Config.isInitBoot() ? "init_boot" : "boot") + next_slot;
+        LogUtils.d("patchBoot",srcBoot);
         FileUtils.delete(aInstallDir + "/boot.img");
         FileUtils.delete(aInstallDir + "/magisk_patch.img");
 
@@ -120,10 +118,8 @@ public class PatchUtils {
         //ksud boot-patch -b <boot.img> --kmi android13-5.10
 
         // 提取第二分区的boot镜像
-        String srcBoot = "/dev/block/bootdevice/by-name/init_boot" + next_slot;
-        if (!aFileSystemManager.getFile(srcBoot).exists() || Build.MODEL.equals("PHP110"))
-            srcBoot = "/dev/block/bootdevice/by-name/boot" + next_slot;
-
+        String srcBoot = "/dev/block/bootdevice/by-name/" + (Config.isInitBoot() ? "init_boot" : "boot") + next_slot;
+        LogUtils.d("patchBoot",srcBoot);
         ShellUtils.fastCmd("rm -r " + aInstallDir + "/*.img");
 
         if (!FlashUtils.extract_image(srcBoot, aInstallDir + "/boot.img"))

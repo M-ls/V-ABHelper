@@ -49,4 +49,14 @@ public class Config {
 
 
     }
+    public static boolean isInitBoot(){
+        // 检查主版本号是否大于等于5，并且不以"android12-"或"5.4"开头 这里应该再加一个是否存在init_boot判断但目前的判断够用了
+        try{
+            String infoKernelVersion = System.getProperty("os.version");
+            return Integer.parseInt(infoKernelVersion.split("\\.")[0]) >= 5 && !infoKernelVersion.startsWith("5.4") && !infoKernelVersion.contains("android12-");
+        } catch (Exception e){
+            LogUtils.e("isInitBoot", "Error while checking kernel version: " + e.getMessage());
+            return false;
+        }
+    }
 }
